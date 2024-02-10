@@ -27,6 +27,7 @@ const customerSchema = new Schema({
 // customerSchema.pre("findOneAndDelete", async() => {
 //     console.log("PRE MIDDLEWARE");
 // });
+
 customerSchema.post("findOneAndDelete", async(customer) => {
     if(customer.orders.length) {
        let res = await Order.deleteMany({ _id: { $in: customer.orders} });
